@@ -10,11 +10,14 @@ import { useState } from "react";
 export default function Home() {
   //tasks = array of {id: string, title: string, completed: boolean}
   const [tasks, setTasks] = useState([]);
+  const [countall, setCountAll] = useState(0);
+  const [countdone, setCountDone] = useState(0);
 
   const addTask = (newTaskTitle) => {
     const newTask = { id: nanoid(), title: newTaskTitle, completed: false };
     const newTasks = [...tasks, newTask];
     setTasks(newTasks);
+    setCountAll(countall + 1);
   };
 
   const deleteTask = (taskId) => {
@@ -30,6 +33,7 @@ export default function Home() {
     const task = newTasks.find((x) => x.id === taskId);
     task.completed = !task.completed;
     setTasks(newTasks);
+    setCountDone(countdone + 1);
   };
 
   return (
@@ -41,7 +45,7 @@ export default function Home() {
       <div style={{ maxWidth: "400px" }} className="mx-auto">
         {/* Task summary */}
         <p className="text-center text-secondary fst-italic">
-          All (...) Done (...)
+          All ({countall}) Done ({countdone})
         </p>
         {/* task input */}
         <TaskInput addTaskFunc={addTask} />
@@ -60,7 +64,7 @@ export default function Home() {
       </div>
 
       {/* //footer section */}
-      <Footer year="2023" fullName="Chayanin Suatap" studentId="12345678" />
+      <Footer year="2023" fullName="Rawipa Samhuay" studentId="650610801" />
     </div>
   );
 }
