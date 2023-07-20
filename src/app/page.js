@@ -11,7 +11,7 @@ export default function Home() {
   //tasks = array of {id: string, title: string, completed: boolean}
   const [tasks, setTasks] = useState([]);
   const [countall, setCountAll] = useState(0);
-  const [countdone, setCountDone] = useState(0);
+  const d = tasks.filter((t) => t.completed).length;
 
   const addTask = (newTaskTitle) => {
     const newTask = { id: nanoid(), title: newTaskTitle, completed: false };
@@ -33,7 +33,6 @@ export default function Home() {
     const task = newTasks.find((x) => x.id === taskId);
     task.completed = !task.completed;
     setTasks(newTasks);
-    setCountDone(countdone + 1);
   };
 
   return (
@@ -45,7 +44,7 @@ export default function Home() {
       <div style={{ maxWidth: "400px" }} className="mx-auto">
         {/* Task summary */}
         <p className="text-center text-secondary fst-italic">
-          All ({countall}) Done ({countdone})
+          All ({countall}) Done ({d})
         </p>
         {/* task input */}
         <TaskInput addTaskFunc={addTask} />
